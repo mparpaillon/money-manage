@@ -1,16 +1,19 @@
 {
   "name": "money-manage",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Michel Parpaillon (@mparpaillon)",
   "description": "Simple tool for money management when investing in crypto-currencies",
   "scripts": {
     "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build --prod",
+    "build": "ionic-app-scripts build",
     "postbuild": "workbox inject:manifest",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "deploy:web": "ionic build --prod && firebase deploy --only hosting"
+    "deploy:web": "npm run build -- --prod && firebase deploy --only hosting"
+  },
+  "config": {
+    "ionic_copy": "./copy.config.js"
   },
   "dependencies": {
     "@angular/common": "5.0.1",

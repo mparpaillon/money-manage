@@ -1,14 +1,45 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      <img src="assets/images/logo.png" class="logo" alt="">
+      Money manage
     </ion-title>
+    <ion-select [(ngModel)]="currency" class="currencySelector">
+      <ion-option value="$">$</ion-option>
+      <ion-option value="€">€</ion-option>
+    </ion-select>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label stacked>Accepted loss (in %)</ion-label>
+      <ion-input type="number" formControlName="acceptedLoss" min="1" max="100" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Capital (in {{ currency }})</ion-label>
+      <ion-input type="number" formControlName="capital" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Unit price (in {{ currency }}, eg 8000 for 1 XBT)</ion-label>
+      <ion-input type="number" formControlName="unitPrice" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Stop loss (in {{ currency }})</ion-label>
+      <ion-input type="number" formControlName="stopLoss" clearInput></ion-input>
+    </ion-item>
+    <br />
+    <button ion-button block type="submit" [disabled]="!form.valid">Submit</button>
+
+    <ion-card *ngIf="result">
+      <ion-card-content>{{ result }}</ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Version: 1.0.1</ion-title>
+  </ion-toolbar>
+</ion-footer>
